@@ -19,6 +19,7 @@ const reader = document.getElementById("reader");
 const counterEl = document.getElementById("counter");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
+const zoomBtn = document.getElementById("zoom-btn");
 const lightbox = document.getElementById("lightbox");
 const lightboxStage = document.getElementById("lightbox-stage");
 const lightboxCounter = document.getElementById("lightbox-counter");
@@ -111,9 +112,6 @@ async function renderCurrentView() {
       leaf.className = "leaf";
       leaf.style.width = `${cssW}px`;
       leaf.style.height = `${cssH}px`;
-      leaf.setAttribute("role", "button");
-      leaf.setAttribute("tabindex", "0");
-      leaf.setAttribute("aria-label", `Seite ${p} vergrößern`);
       leaf.dataset.pageNumber = String(p);
       const label = document.createElement("span");
       label.className = "leaf-label";
@@ -123,13 +121,22 @@ async function renderCurrentView() {
       canvas.style.width = `${cssW}px`;
       canvas.style.height = `${cssH}px`;
       leaf.appendChild(canvas);
-      leaf.addEventListener("click", () => openLightbox(p));
-      leaf.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openLightbox(p);
-        }
-      });
+
+      // Click halves: left → previous, right → next.
+      const prevHalf = document.createElement("button");
+      prevHalf.type = "button";
+      prevHalf.className = "leaf-half leaf-half-prev";
+      prevHalf.setAttribute("aria-label", "Vorherige Seite");
+      prevHalf.addEventListener("click", () => go(-1));
+      const nextHalf = document.createElement("button");
+      nextHalf.type = "button";
+      nextHalf.className = "leaf-half leaf-half-next";
+      nextHalf.setAttribute("aria-label", "Nächste Seite");
+      nextHalf.addEventListener("click", () => go(1));
+      if (viewIndex === 0) prevHalf.dataset.disabled = "true";
+      if (viewIndex === views.length - 1) nextHalf.dataset.disabled = "true";
+      leaf.appendChild(prevHalf);
+      leaf.appendChild(nextHalf);
       return leaf;
     })
   );
@@ -296,11 +303,19 @@ window.addEventListener("keydown", (e) => {
     e.preventDefault();
     viewIndex = views.length - 1;
     renderCurrentView();
+  } else if (e.key === "z" || e.key === "Z") {
+    e.preventDefault();
+    const currentPage = views[viewIndex][0];
+    if (currentPage) openLightbox(currentPage);
   }
 });
 
 prevBtn.addEventListener("click", () => go(-1));
 nextBtn.addEventListener("click", () => go(1));
+zoomBtn.addEventListener("click", () => {
+  const currentPage = views[viewIndex][0];
+  if (currentPage) openLightbox(currentPage);
+});
 
 // Touch/pointer swipe on the reader (not when lightbox is open).
 (() => {

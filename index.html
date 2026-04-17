@@ -38,9 +38,12 @@
   </main>
 
   <nav class="dock" aria-label="Navigation">
-    <button type="button" class="dock-btn" id="prev" aria-label="Vorherige Seite">← zurück</button>
-    <span class="counter" id="counter" aria-live="polite">—</span>
-    <button type="button" class="dock-btn" id="next" aria-label="Nächste Seite">weiter →</button>
+    <button type="button" class="dock-btn dock-prev" id="prev" aria-label="Vorherige Seite">← zurück</button>
+    <div class="dock-center">
+      <span class="counter" id="counter" aria-live="polite">—</span>
+      <button type="button" class="dock-zoom" id="zoom-btn" aria-label="Seite vergrößern">vergrößern&nbsp;⌕</button>
+    </div>
+    <button type="button" class="dock-btn dock-next" id="next" aria-label="Nächste Seite">weiter →</button>
   </nav>
 
   <footer class="chrome chrome-bottom">
