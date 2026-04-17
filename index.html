@@ -2,20 +2,33 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Vladyslava Yesypovych — Portfolio</title>
   <meta name="description" content="Portfolio von Vladyslava Yesypovych, Architektin M.A. — Fokus: ökologisches Bauen, Holzbau, soziale Projekte." />
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Vladyslava Yesypovych</h1>
-    <p class="tagline">Architektin M.A. · ökologisches Bauen · Holzbau · soziale Projekte</p>
+  <header class="chrome">
+    <div class="chrome-left">
+      <p class="mark">Vladyslava Yesypovych</p>
+      <p class="role">Architektin M.A.</p>
+    </div>
+    <div class="chrome-right">
+      <a href="mailto:yesypovychv@gmail.com">yesypovychv@gmail.com</a>
+      <a href="tel:+491734931885">+49 173 4931885</a>
+      <a href="https://instagram.com/avladakadabra" target="_blank" rel="noopener noreferrer">@avladakadabra</a>
+    </div>
   </header>
 
-  <main id="pdf-viewer" aria-label="Portfolio">
+  <main id="reader" aria-label="Portfolio">
+    <div id="stage" role="group" aria-roledescription="Portfolio-Seiten">
+      <div id="stage-inner"></div>
+    </div>
     <noscript>
       <p class="fallback">
         Für die Vorschau wird JavaScript benötigt.
@@ -24,15 +37,32 @@
     </noscript>
   </main>
 
-  <footer>
-    <nav aria-label="Kontakt">
-      <a href="mailto:yesypovychv@gmail.com">yesypovychv@gmail.com</a>
-      <a href="tel:+491734931885">+49 173 4931885</a>
-      <a href="https://instagram.com/avladakadabra" target="_blank" rel="noopener noreferrer">@avladakadabra</a>
-      <a href="portfolio.pdf" download>Portfolio als PDF</a>
-    </nav>
-    <p class="location">Königs Wusterhausen · Brandenburg</p>
+  <nav class="dock" aria-label="Navigation">
+    <button type="button" class="dock-btn" id="prev" aria-label="Vorherige Seite">← zurück</button>
+    <span class="counter" id="counter" aria-live="polite">—</span>
+    <button type="button" class="dock-btn" id="next" aria-label="Nächste Seite">weiter →</button>
+  </nav>
+
+  <footer class="chrome chrome-bottom">
+    <div class="chrome-left">
+      <p class="focus">ökologisches Bauen &nbsp;·&nbsp; Holzbau &nbsp;·&nbsp; soziale Projekte</p>
+    </div>
+    <div class="chrome-right">
+      <p class="location">Königs Wusterhausen · Brandenburg · DE</p>
+      <a href="portfolio.pdf" download>Portfolio_Yesypovych.pdf ↓</a>
+    </div>
   </footer>
+
+  <div id="lightbox" aria-hidden="true" aria-modal="true" role="dialog" aria-label="Seitenansicht vergrößert">
+    <div id="lightbox-stage"></div>
+    <div class="lightbox-chrome">
+      <span id="lightbox-counter">—</span>
+      <button type="button" id="lightbox-zoom-out" aria-label="herauszoomen">−</button>
+      <button type="button" id="lightbox-zoom-reset" aria-label="Zoom zurücksetzen">100%</button>
+      <button type="button" id="lightbox-zoom-in" aria-label="hineinzoomen">+</button>
+      <button type="button" id="lightbox-close" aria-label="schließen">schließen ×</button>
+    </div>
+  </div>
 
   <script type="module" src="main.js"></script>
 </body>
