@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# node
+node_modules/
+
+# Rohmaterial (nicht auf GitHub Pages ausliefern — bleibt nur lokal / im Google Drive)
+source/
+wetransfer_*/
+swisstransfer_*/
+portfolio gesamt.pdf
