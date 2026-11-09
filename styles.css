@@ -95,8 +95,7 @@ a:focus-visible {
 }
 
 .role,
-.focus,
-.location {
+.focus {
   color: var(--muted);
 }
 
